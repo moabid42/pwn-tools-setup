@@ -7,6 +7,10 @@ Docker sould be installed and running. You can check it using this command :
 ```bash
 sudo systemctl status docker
 ```
+Makefile, you check if it's installed using:
+```bash
+make --version
+```
 
 ## USAGE
 
