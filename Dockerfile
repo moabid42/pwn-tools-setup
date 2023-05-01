@@ -20,7 +20,7 @@ RUN wget https://github.com/io12/pwninit/releases/download/3.3.0/pwninit
 RUN chmod +x pwninit
 
 RUN gem install one_gadget
-RUN pip3 install IPython icecream angr
+RUN pip3 install IPython icecream angr pwntools
 
 WORKDIR /home
 CMD bash
