@@ -2,10 +2,10 @@ FROM --platform=linux/amd64 ubuntu:22.04
 
 #https://wiki.ubuntu.com/Releases
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update --fix-missing && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    apt-get install -y --no-install-recommends \
     git \
     gdb \
     wget \
@@ -43,4 +43,4 @@ RUN gem install one_gadget
 RUN pip3 install IPython icecream angr pwntools
 
 WORKDIR /home/localdir
-CMD bash
+CMD ["bash"]
