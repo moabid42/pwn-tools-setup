@@ -4,12 +4,21 @@ Color_Off=\033[0m
 
 build_m:
 	@docker build --platform linux/amd64 -f Dockerfile.m --no-cache -t ubuntu-pwner .
-	@echo 'alias pwnbox="docker run -it -v `pwd`:/home/localdir ubuntu-pwner /bin/bash"' >> ~/.zshrc
+	@if [ "$$SHELL" = "/bin/zsh" ]; then \
+		echo 'alias pwnbox="docker run -it -v `pwd`:/home/localdir ubuntu-pwner /bin/bash"' >> ~/.zshrc; \
+	else \
+		echo 'alias pwnbox="docker run -it -v `pwd`:/home/localdir ubuntu-pwner /bin/bash"' >> ~/.bashrc; \
+	fi
 	@echo "${Green}[+] The Building is done and pwnbox alias is created${Color_Off}"
 	@echo "${BGreen}[+] Source your user interface to apply the aliases with (source .bashrc) or (source .zshrc)${Color_Off}"
+
 build_x86:
 	@docker build -f Dockerfile.x86 -t ubuntu-pwner .
-	@echo 'alias pwnbox="docker run -it -v `pwd`:/home/localdir ubuntu-pwner /bin/bash"' >> ~/.zshrc
+	@if [ "$$SHELL" = "/bin/zsh" ]; then \
+		echo 'alias pwnbox="docker run -it -v `pwd`:/home/localdir ubuntu-pwner /bin/bash"' >> ~/.zshrc; \
+	else \
+		echo 'alias pwnbox="docker run -it -v `pwd`:/home/localdir ubuntu-pwner /bin/bash"' >> ~/.bashrc; \
+	fi
 	@echo "${Green}[+] The Building is done and pwnbox alias is created${Color_Off}"
 	@echo "${BGreen}[+] Source your user interface to apply the aliases with (source .bashrc) or (source .zshrc)${Color_Off}"
 
@@ -17,4 +26,4 @@ destroy:
 	@docker rmi -f ubuntu-pwner || echo "${Green}[+] No image named ubuntu-pwner to remove${Color_Off}"
 	@echo "${Green}[+] Removed the ubuntu-pwner image${Color_Off}"
 
-.PHONY: build destroy
+.PHONY: build_m build_x86 build destroy
